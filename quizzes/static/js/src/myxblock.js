@@ -50,9 +50,9 @@ function MyXBlock(runtime, element) {
 
      
     var $questions= $("section.quiz", element).find(".question").find(".question-content").find("input[type=radio], input[type=checkbox]");
-    var $text= $("section.quiz", element).find(".question").find(".question-content").find("input[type=text]");
+   /* var $text= $("section.quiz", element).find(".question").find(".question-content").find("input[type=text]");*/
     var $area= $(".active-code", element).find("textarea");
-   
+    var $text=$("section.normal", element).find("input[type=text]");
     tk=""
     answer=""
     wd=""
@@ -126,7 +126,7 @@ function MyXBlock(runtime, element) {
    }
 
 
-  if( tk=="" && answer!="")
+  if(answer!="")
    {
    $(this, element).val("正在提交...");
    $(this, element).attr("disabled",true);
