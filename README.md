@@ -29,6 +29,14 @@ $sudo -u edxapp /edx/bin/pip.edxapp install <path_of_uc_quizzes>
  * 对md文件的处理使用了工具[gitbook](https://github.com/chtq/gitbook-1.5.0)和插件[gitbook-plugin-quizzes](https://github.com/chtq/gitbook-plugin-quizzes)。在需要处理md文件目录里面，需要有3个文件[book.json](https://github.com/chtq/exercise_web/blob/master/book.json)(这是gitbook进行处理过程的配置文件)，[README.md](https://github.com/chtq/exercise_web/blob/master/README.md)（页面介绍，生成index.html），[SUMMARY.md](https://github.com/chtq/exercise_web/blob/master/SUMMARY.md)（gitbook会按照这里面指定的文件处理）。gitbook处理完后，会把md文件生成的html放在_book目录下，你可以把_book目录下的html文件提交到github上的仓库中。
  * 我的gitbook使用的版本是1.5.0（现在已经更新到2.5多了，有很大的改动），nodejs版本是v0.10.33，机器是ubuntu32位系统。如果使用别的nodejs版本，可能会有问题（下载nodejs源码重新编译安装可能会解决问题，不要使用apt-get命令安装，但是目前nodejs的版本是4.1多，gitbook1.5.0基于新版的nodejs安装所需要的npm库会有错误）。如果用64位系统，需要执行`sudo npm install`命令重新下载gitbook所需要的依赖库.
 
+## ulimit -n
+ 修改ulimit系统的最大文件描述符（默认是1024）的值，在/etc/security/limits.conf文件增加以下内容
+ ```
+ hard     nofile     10240 
+ soft     nofile     10240 
+```
+           
+           
 ## 自动处理auto.py原理
  * 从题库[仓库](https://github.com/chyyuu/os_course_exercise_library)中把原始md文件clone下来，对文件进行预处理成并调用gitbook把md处理为html网页，最后上传到html[仓库](https://github.com/chtq/exercise_web)。
  
